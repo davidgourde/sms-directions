@@ -5,7 +5,7 @@ from sms_directions.sms import send_sms
 
 
 app = Flask(__name__)
-app.config.from_object('./sms_directions/config')
+app.config.from_pyfile('config.py')
 api = rest.Api(app)
 
 
