@@ -3,3 +3,4 @@ flask_restful
 flask_script
 gunicorn
 nexmo
+googlemaps
