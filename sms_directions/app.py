@@ -4,18 +4,31 @@ import flask_restful as rest
 from sms_directions.directions import get_directions
 
 
-app = Flask(__name__)
-app.config.from_pyfile('config.py')
-api = rest.Api(app)
+def init_rest_api(app):
+    api = rest.Api(app)
+
+    class GetDirections(rest.Resource):
+        def get(self):
+            try:
+                origin, destination, mode = request.args.get('text').split(';')
+                print('argsText = ' + request.args.get('text'))
+            except Exception as e:
+                print(e)
+                origin, destination, mode = 'Laval', 'Montreal', 'transit'
+            finally:
+                return get_directions(origin, destination, mode), 200
+
+    api.add_resource(GetDirections, '/')
 
 
-class GetDirections(rest.Resource):
-    def get(self):
-        origin, destination, mode = request.args['text'].split()
-        return get_directions(), 200
+def init_app():
+    app = Flask(__name__)
+    app.config.from_pyfile('config.py')
+    init_rest_api(app)
+    return app
 
 
-api.add_resource(GetDirections, '/')
+app = init_app()
 
 if __name__ == '__main__':
     app.run()

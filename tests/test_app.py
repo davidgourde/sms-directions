@@ -1,7 +1,2 @@
-import mock
-
-
-@mock.patch('sms_directions.app.app', autospec=True)
-def test_app(mocked_app):
-    mocked_app.run()
-    assert True  # No error found in app setup
+def test_get(client):
+    assert client.get('/', query_string={'text':'laval;montreal;transit'}).status_code == 200
