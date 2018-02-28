@@ -11,7 +11,8 @@ api = rest.Api(app)
 
 class GetDirections(rest.Resource):
     def get(self):
-        return get_directions(request.args), 200
+        origin, destination, mode = request.args['text'].split()
+        return get_directions(), 200
 
 
 api.add_resource(GetDirections, '/')
