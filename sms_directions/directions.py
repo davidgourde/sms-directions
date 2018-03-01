@@ -29,7 +29,7 @@ def get_directions(origin, destination, mode):
 
         for step in leg['steps']:
             html_instructions = step['html_instructions']
-            soup = BeautifulSoup(html_instructions)
+            soup = BeautifulSoup(html_instructions, "html.parser")
             instructions = soup.get_text()
             result += "{}. {}".format(i, instructions) + '\n\n'
             i = i + 1
