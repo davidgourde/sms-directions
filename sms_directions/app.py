@@ -14,13 +14,13 @@ def init_rest_api(app):
             if len(args) == 2:
                 origin, destination = args
                 mode = 'driving'
-                get_directions(origin, destination, mode)
+                return get_directions(origin, destination, mode), 200
             elif len(args) == 3:
                 origin, destination, mode = args
-                get_directions(origin, destination, mode)
+                return get_directions(origin, destination, mode), 200
             else:
-                send_sms('La syntaxe correcte est: origin;destination;transit où ;transit est optionnel.')
-            return 200
+                return send_sms('La syntaxe correcte est: origin;destination;transit où ;transit est optionnel.'), 200
+
 
     api.add_resource(GetDirections, '/')
 

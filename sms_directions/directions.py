@@ -37,4 +37,4 @@ def get_directions(origin, destination, mode):
         send_sms(result)
     except Exception as e:
         print(e)
-        send_sms('Oups désolé, bug\n\n' + e)
+        send_sms('Oups désolé, bug!\n\n' + e)
