@@ -20,17 +20,20 @@ def get_directions(origin, destination, mode):
                                          departure_time=now,
                                          language='fr')
 
-    result = ""
-    i = 1
-    leg = directions_result[0]['legs'][0]
-    result += 'Départ: ' + leg['start_address'] + '\n'
-    result += 'Arrivée: ' + leg['end_address'] + '\n\n'
+    try:
+        result = ""
+        i = 1
+        leg = directions_result[0]['legs'][0]
+        result += 'Départ: ' + leg['start_address'] + '\n'
+        result += 'Arrivée: ' + leg['end_address'] + '\n\n'
 
-    for step in leg['steps']:
-        html_instructions = step['html_instructions']
-        soup = BeautifulSoup(html_instructions)
-        instructions = soup.get_text()
-        result += "{}. {}".format(i, instructions) + '\n\n'
-        i = i + 1
+        for step in leg['steps']:
+            html_instructions = step['html_instructions']
+            soup = BeautifulSoup(html_instructions)
+            instructions = soup.get_text()
+            result += "{}. {}".format(i, instructions) + '\n\n'
+            i = i + 1
 
-    send_sms(result)
+        send_sms(result)
+    except Exception as e:
+        print(e)
