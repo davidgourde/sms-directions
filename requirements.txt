@@ -4,3 +4,4 @@ flask_script
 gunicorn
 nexmo
 googlemaps
+beautifulsoup4
