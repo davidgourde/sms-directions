@@ -6,7 +6,6 @@ from sms_directions.app import init_app
 @pytest.fixture(autouse=True)
 def set_env_config():
     config.SMS_SENDER_NUMBER = '1'
-    config.TEST_NUMBER = '2'
 
 
 @pytest.fixture

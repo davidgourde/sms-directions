@@ -10,6 +10,7 @@ def init_rest_api(app):
 
     class GetDirections(rest.Resource):
         def get(self):
+            caller_number = request.args.get('msisdn')
             args = request.args.get('text').split(';')
             if len(args) == 2:
                 origin, destination = args
@@ -19,7 +20,7 @@ def init_rest_api(app):
                 origin, destination, mode = args
                 return get_directions(origin, destination, mode), 200
             else:
-                return send_sms('La syntaxe correcte est: origin;destination;transit où ;transit est optionnel.'), 200
+                return send_sms('La syntaxe correcte est: origin;destination;transit où ;transit est optionnel.', caller_number), 200
 
 
     api.add_resource(GetDirections, '/')

@@ -6,7 +6,7 @@ from sms_directions import config
 
 def test_send_sms():
     with mock.patch('sms_directions.sms.client.send_message') as mocked_send_sms:
-        send_sms('expected')
+        send_sms('expected', 'number')
     mocked_send_sms.assert_called_with({'from': config.SMS_SENDER_NUMBER,
-                                        'to': config.TEST_NUMBER,
+                                        'to': 'number',
                                         'text': 'expected'})

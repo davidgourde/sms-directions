@@ -10,7 +10,7 @@ from sms_directions.sms import send_sms
 gmaps = googlemaps.Client(key=GOOGLE_MAPS_DIRECTIONS_API_KEY) if GOOGLE_MAPS_DIRECTIONS_API_KEY else None
 
 
-def get_directions(origin, destination, mode):
+def get_directions(origin, destination, mode, caller_number):
     if not gmaps:
         return
     now = datetime.now()
@@ -34,7 +34,7 @@ def get_directions(origin, destination, mode):
             result += "{}. {}".format(i, instructions) + '\n\n'
             i = i + 1
 
-        send_sms(result)
+        send_sms(result, caller_number)
     except Exception as e:
         print(e)
-        send_sms('Oups désolé, bug!\n\n' + str(e))
+        send_sms('Oups désolé, bug!\n\n' + str(e), caller_number)
